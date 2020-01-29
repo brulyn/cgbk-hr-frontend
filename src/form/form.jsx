@@ -159,46 +159,52 @@ export default class MyFormComponet extends Component {
           </Grid>
           <Grid columns="three" divided>
             <Form.Group>
-              <Form.Field
-                control={Select}
-                options={monthOptions}
-                onChange={this.handleMthChange}
-                name="month"
-                label={{
-                  children: "Month",
-                  htmlFor: "form-select-control-month"
-                }}
-                placeholder="Month"
-                search
-                // searchInput={{ id: 'form-select-control-month' }}
-              />
-              <Form.Field
-                control={Select}
-                options={quarterOptions}
-                onChange={this.handleQtChange}
-                name="quarter"
-                label={{
-                  children: "Quarter",
-                  htmlFor: "form-select-control-quater"
-                }}
-                placeholder="Quarter"
-                search
-                // searchInput={{ id: 'form-select-control-month' }}
-              />
+              {this.state.period === "2" && (
+                <Form.Field
+                  control={Select}
+                  options={monthOptions}
+                  onChange={this.handleMthChange}
+                  name="month"
+                  label={{
+                    children: "Month",
+                    htmlFor: "form-select-control-month"
+                  }}
+                  placeholder="Month"
+                  search
+                  // searchInput={{ id: 'form-select-control-month' }}
+                />
+              )}
+              {this.state.period === "3" && (
+                <Form.Field
+                  control={Select}
+                  options={quarterOptions}
+                  onChange={this.handleQtChange}
+                  name="quarter"
+                  label={{
+                    children: "Quarter",
+                    htmlFor: "form-select-control-quater"
+                  }}
+                  placeholder="Quarter"
+                  search
+                  // searchInput={{ id: 'form-select-control-month' }}
+                />
+              )}
 
-              <Form.Field
-                id="form-input-control-year"
-                control={Input}
-                label="Year"
-                name="year"
-                placeholder="19xx or 20xx"
-                value={this.state.year}
-                onChange={this.handleYrChange}
-                // error={{
-                //   content: 'Please enter a valid email address',
-                //   pointing: 'below',
-                // }}
-              />
+              {this.state.period !== "" && this.state.period !== "1" && (
+                <Form.Field
+                  id="form-input-control-year"
+                  control={Input}
+                  label="Year"
+                  name="year"
+                  placeholder="19xx or 20xx"
+                  value={this.state.year}
+                  onChange={this.handleYrChange}
+                  // error={{
+                  //   content: 'Please enter a valid email address',
+                  //   pointing: 'below',
+                  // }}
+                />
+              )}
             </Form.Group>
           </Grid>
 
