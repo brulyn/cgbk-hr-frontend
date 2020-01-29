@@ -33,7 +33,8 @@ export default class MyFormComponet extends Component {
     this.handlePdChange = this.handlePdChange.bind(this);
     this.handleQtChange = this.handleQtChange.bind(this);
     this.handleIdChange = this.handleIdChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleLatenessRpt = this.handleLatenessRpt.bind(this);
+    this.handleOvertimeRpt = this.handleOvertimeRpt.bind(this);
   }
 
   componentDidMount() {
@@ -82,7 +83,7 @@ export default class MyFormComponet extends Component {
     });
   };
 
-  handleSubmit() {
+  handleLatenessRpt() {
     console.log(this.state);
     let q_string = "";
     if (this.state.userId !== "") {
@@ -96,12 +97,27 @@ export default class MyFormComponet extends Component {
     window.open(`http://172.26.104.241:3670/lateness_rpt${q_string}`, "_blank");
   }
 
+  handleOvertimeRpt() {
+    console.log(this.state);
+    let q_string = "";
+    if (this.state.userId !== "") {
+      q_string = q_string + `?userid=${this.state.userId}`;
+      if (this.state.department !== "") {
+        q_string = q_string + `&unitid=${this.state.department}`;
+      }
+    } else if (this.state.department !== "") {
+      q_string = q_string + `?unitid=${this.state.department}`;
+    }
+    window.open(`http://172.26.104.241:3670/overtime_rpt${q_string}`, "_blank");
+  }
+
   render() {
     const { value } = this.state;
     return (
       <Container>
         <Header as="h3" content="Form" style={style.h3} />
-        <Form onSubmit={this.handleSubmit}>
+        {/* <Form onSubmit={this.handleLatenessRpt}> */}
+        <Form>
           <Grid columns="three" widths="equal" divided>
             <Form.Group widths="equal">
               <Form.Field
@@ -191,13 +207,13 @@ export default class MyFormComponet extends Component {
               id="form-button-control-public"
               control={Button}
               content="Lateness Rpt"
-              // onClick={this.handleSubmit}
+              onClick={this.handleLatenessRpt}
             />
             <Form.Button
               id="form-button-control-public"
               control={Button}
               content="Overtime Rpt"
-              // onClick={this.handleSubmit}
+              onClick={this.handleOvertimeRpt}
             />
           </Grid>
         </Form>
