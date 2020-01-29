@@ -88,11 +88,20 @@ export default class MyFormComponet extends Component {
     let q_string = "";
     if (this.state.userId !== "") {
       q_string = q_string + `?userid=${this.state.userId}`;
-      if (this.state.department !== "") {
+      if (this.state.department !== "" && this.state.department !== 9999) {
         q_string = q_string + `&unitid=${this.state.department}`;
       }
-    } else if (this.state.department !== "") {
+
+      if (this.state.month !== "") {
+        q_string = q_string + `&mon=${this.state.month}&yr=${this.state.year}`;
+      }
+    } else if (this.state.department !== "" && this.state.department !== 9999) {
       q_string = q_string + `?unitid=${this.state.department}`;
+      if (this.state.month !== "") {
+        q_string = q_string + `&mon=${this.state.month}&yr=${this.state.year}`;
+      }
+    } else if (this.state.month !== "") {
+      q_string = q_string + `?mon=${this.state.month}&yr=${this.state.year}`;
     }
     window.open(`http://172.26.104.241:3670/lateness_rpt${q_string}`, "_blank");
   }
