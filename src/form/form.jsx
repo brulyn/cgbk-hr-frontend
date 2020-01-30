@@ -19,7 +19,7 @@ export default class MyFormComponet extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      departmentOptions: ["loading..."],
+      departmentOptions: [{ key: "1", text: "loading...", value: "1" }],
       department: "",
       userId: "",
       year: "2020",
@@ -49,25 +49,39 @@ export default class MyFormComponet extends Component {
 
   handlePdChange = (e, { value }) => {
     this.setState({
-      period: value
+      period: value,
+      userId: "",
+      year: "2020",
+      month: "",
+      quarter: ""
     });
   };
 
   handleMthChange = (e, { value }) => {
     this.setState({
-      month: value
+      month: value,
+      userId: "",
+      year: "2020",
+      quarter: ""
     });
   };
 
   handleDptChange = (e, { value }) => {
     this.setState({
-      department: value
+      department: value,
+      userId: "",
+      year: "2020",
+      month: "",
+      quarter: ""
     });
   };
 
   handleQtChange = (e, { value }) => {
     this.setState({
-      quarter: value
+      quarter: value,
+      userId: "",
+      year: "2020",
+      month: ""
     });
   };
 
