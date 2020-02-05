@@ -22,7 +22,7 @@ export default class MyFormComponet extends Component {
       departmentOptions: [{ key: "1", text: "loading...", value: "1" }],
       department: "",
       userId: "",
-      year: "2020",
+      year: "",
       month: "",
       quarter: "",
       period: ""
@@ -50,37 +50,26 @@ export default class MyFormComponet extends Component {
   handlePdChange = (e, { value }) => {
     this.setState({
       period: value,
-      userId: "",
-      year: "2020",
-      month: "",
-      quarter: ""
+      month: ""
     });
   };
 
   handleMthChange = (e, { value }) => {
     this.setState({
       month: value,
-      userId: "",
-      year: "2020",
       quarter: ""
     });
   };
 
   handleDptChange = (e, { value }) => {
     this.setState({
-      department: value,
-      userId: "",
-      year: "2020",
-      month: "",
-      quarter: ""
+      department: value
     });
   };
 
   handleQtChange = (e, { value }) => {
     this.setState({
       quarter: value,
-      userId: "",
-      year: "2020",
       month: ""
     });
   };
@@ -92,6 +81,7 @@ export default class MyFormComponet extends Component {
   };
 
   handleYrChange = (e, { value }) => {
+    console.log(value);
     this.setState({
       year: value
     });
@@ -106,16 +96,29 @@ export default class MyFormComponet extends Component {
       if (this.state.month !== "") {
         q_string = q_string + `&mon=${this.state.month}&yr=${this.state.year}`;
       }
+
+      if (this.state.quarter !== "") {
+        q_string =
+          q_string + `&quarter=${this.state.quarter}&yr=${this.state.year}`;
+      }
     } else if (
       this.state.department !== "" &&
       this.state.department !== "9999"
     ) {
       q_string = q_string + `?unitid=${this.state.department}`;
+
       if (this.state.month !== "") {
         q_string = q_string + `&mon=${this.state.month}&yr=${this.state.year}`;
       }
+      if (this.state.quarter !== "") {
+        q_string =
+          q_string + `&quarter=${this.state.quarter}&yr=${this.state.year}`;
+      }
     } else if (this.state.month !== "") {
       q_string = q_string + `?mon=${this.state.month}&yr=${this.state.year}`;
+    } else if (this.state.quarter !== "" && this.state.year !== "") {
+      q_string =
+        q_string + `?quarter=${this.state.quarter}&yr=${this.state.year}`;
     }
     window.open(`http://172.26.104.241:3670/lateness_rpt${q_string}`, "_blank");
   }
@@ -132,6 +135,11 @@ export default class MyFormComponet extends Component {
       q_string = q_string + `?unitid=${this.state.department}`;
     }
     window.open(`http://172.26.104.241:3670/overtime_rpt${q_string}`, "_blank");
+  }
+
+  handleDMvtRpt() {
+    console.log(this.state);
+    window.open(`http://172.26.104.241:3670/dailymvt_rpt`, "_blank");
   }
 
   render() {
@@ -243,6 +251,13 @@ export default class MyFormComponet extends Component {
               control={Button}
               content="Overtime Rpt"
               onClick={this.handleOvertimeRpt}
+            />
+
+            <Form.Button
+              id="form-button-control-public"
+              control={Button}
+              content="Daily Movement Rpt"
+              onClick={this.handleDMvtRpt}
             />
           </Grid>
         </Form>
